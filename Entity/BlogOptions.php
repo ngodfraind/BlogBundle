@@ -62,6 +62,20 @@ class BlogOptions
      */
     protected $autoPublishComment;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", name="banner_background_color")
+     */
+    protected $bannerBackgroundColor;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="smallint", name="banner_height")
+     */
+    protected $bannerHeight;
+
     public function __construct()
     {
         $this->authorizeComment          = false;
