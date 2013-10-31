@@ -3,6 +3,7 @@
 namespace Icap\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -72,7 +73,7 @@ class BlogOptions
     /**
      * @var string
      *
-     * @ORM\Column(type="string", name="banner_background_color", options={"default" = "white"})
+     * @ORM\Column(type="string", name="banner_background_color", options={"default" = "#FFFFFF"})
      */
     protected $bannerBackgroundColor;
 
@@ -80,29 +81,30 @@ class BlogOptions
      * @var integer
      *
      * @ORM\Column(type="smallint", name="banner_height", options={"default" = 100})
+     * @Assert\GreaterThanOrEqual(value = 100)
      */
     protected $bannerHeight;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", name="banner_image", nullable=true)
+     * @ORM\Column(type="string", name="banner_background_image", nullable=true)
      */
-    protected $bannerImage;
+    protected $bannerBackgroundImage;
 
     /**
      * @var integer
      *
-     * @ORM\Column(type="smallint", name="banner_image_position", nullable=true)
+     * @ORM\Column(type="smallint", name="banner_background_image_position", options={"default" = 0})
      */
-    protected $bannerImagePosition;
+    protected $bannerBackgroundImagePosition;
 
     /**
      * @var integer
      *
-     * @ORM\Column(type="smallint", name="banner_image_repeat", nullable=true)
+     * @ORM\Column(type="smallint", name="banner_background_image_repeat", options={"default" = 0})
      */
-    protected $bannerImageRepeat;
+    protected $bannerBackgroundImageRepeat;
 
     public function __construct()
     {
@@ -282,13 +284,13 @@ class BlogOptions
     }
 
     /**
-     * @param string $bannerImage
+     * @param string $bannerBackgroundImage
      *
      * @return BlogOptions
      */
-    public function setBannerImage($bannerImage)
+    public function setBannerBackgroundImage($bannerBackgroundImage)
     {
-        $this->bannerImage = $bannerImage;
+        $this->bannerBackgroundImage = $bannerBackgroundImage;
 
         return $this;
     }
@@ -296,19 +298,19 @@ class BlogOptions
     /**
      * @return string
      */
-    public function getBannerImage()
+    public function getBannerBackgroundImage()
     {
-        return $this->bannerImage;
+        return $this->bannerBackgroundImage;
     }
 
     /**
-     * @param int $bannerImagePosition
+     * @param int $bannerBackgroundImagePosition
      *
      * @return BlogOptions
      */
-    public function setBannerImagePosition($bannerImagePosition)
+    public function setBannerBackgroundImagePosition($bannerBackgroundImagePosition)
     {
-        $this->bannerImagePosition = $bannerImagePosition;
+        $this->bannerBackgroundImagePosition = $bannerBackgroundImagePosition;
 
         return $this;
     }
@@ -316,19 +318,19 @@ class BlogOptions
     /**
      * @return int
      */
-    public function getBannerImagePosition()
+    public function getBannerBackgroundImagePosition()
     {
-        return $this->bannerImagePosition;
+        return $this->bannerBackgroundImagePosition;
     }
 
     /**
-     * @param int $bannerImageRepeat
+     * @param int $bannerBackgroundImageRepeat
      *
      * @return BlogOptions
      */
-    public function setBannerImageRepeat($bannerImageRepeat)
+    public function setBannerBackgroundImageRepeat($bannerBackgroundImageRepeat)
     {
-        $this->bannerImageRepeat = $bannerImageRepeat;
+        $this->bannerBackgroundImageRepeat = $bannerBackgroundImageRepeat;
 
         return $this;
     }
@@ -336,9 +338,9 @@ class BlogOptions
     /**
      * @return int
      */
-    public function getBannerImageRepeat()
+    public function getBannerBackgroundImageRepeat()
     {
-        return $this->bannerImageRepeat;
+        return $this->bannerBackgroundImageRepeat;
     }
 
     /**
