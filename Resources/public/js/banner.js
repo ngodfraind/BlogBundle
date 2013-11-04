@@ -81,7 +81,8 @@
         updateBannerBackgroundImageRepeat();
     });
 
-    function updateBannerBackgroundImageRepeat() {
+    function updateBannerBackgroundImageRepeat()
+    {
         var repeatValue    = bannerBackgroundImageRepeatField.val();
         var repeatString   = "no-repeat";
 
@@ -100,10 +101,41 @@
         }
 
         banner.css('background-repeat', repeatString);
+
+        updatePositionSelection();
     }
 
     $(".orientation_btn", bannerBackgroundImagePositionBlock).click(function (event) {
         $(".orientation_btn.selected", bannerBackgroundImagePositionBlock).removeClass('selected');
         $(this).addClass('selected');
+
+        updatePositionSelection();
     });
+
+    function updatePositionSelection()
+    {
+        var repeatValue = bannerBackgroundImageRepeatField.val();
+        var repeatClass = null;
+
+        switch(repeatValue) {
+            case '0':
+                break;
+            case '1':
+                repeatClass = "x";
+                break;
+            case '2':
+                repeatClass = "y";
+                break;
+            case '3':
+                repeatClass = "";
+                break;
+        }
+
+        var selectedPosition = $(".orientation_btn.selected", bannerBackgroundImagePositionBlock);
+        console.log(selectedPosition.data());
+        var positions = selectedPosition.data('value').split(" ");
+        console.log(positions);
+        console.log(positions[0]);
+        console.log(positions[1]);
+    }
 })(jQuery);
