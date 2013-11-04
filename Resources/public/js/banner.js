@@ -12,6 +12,16 @@
     var bannerBackgroundImageRepeatField     = $("#icap_blog_options_form_banner_background_image_repeat", bannerBackgroundImageParametersBlock).hide();
     var bannerBackgroundImageRepeatBlock     = $("#icap_blog_options_form_banner_background_image_repeat_choices", bannerBackgroundImageParametersBlock);
 
+    var tabPosition = new Array();
+    tabPosition[0]  = new Array();
+    tabPosition[0]["right"]  = "100%";
+    tabPosition[0]["center"] = "50%";
+    tabPosition[0]["left"]   = "0%";
+    tabPosition[1]  = new Array();
+    tabPosition[1]["bottom"] = "100%";
+    tabPosition[1]["center"] = "50%";
+    tabPosition[1]["top"]    = "0%";
+
     bannerBackgroundImageColorPicker.colorpicker({format: 'hex'}).on('changeColor', function (event) {
         changeBannerBackgroundColor(event.color.toHex());
     });
@@ -107,9 +117,16 @@
 
     $(".orientation_btn", bannerBackgroundImagePositionBlock).click(function (event) {
         $(".orientation_btn.selected", bannerBackgroundImagePositionBlock).removeClass('selected');
-        $(this).addClass('selected');
 
-        updatePositionSelection();
+        var newPosition = $(this);
+        newPosition.addClass('selected');
+
+        var positions = newPosition.data('value').split(" ");
+
+        var positionX = tabPosition[0][positions[0]];
+        var positionY = tabPosition[1][positions[1]];
+
+        banner.css('background-position', positionX + " " + positionY);
     });
 
     function updatePositionSelection()
@@ -130,12 +147,5 @@
                 repeatClass = "";
                 break;
         }
-
-        var selectedPosition = $(".orientation_btn.selected", bannerBackgroundImagePositionBlock);
-        console.log(selectedPosition.data());
-        var positions = selectedPosition.data('value').split(" ");
-        console.log(positions);
-        console.log(positions[0]);
-        console.log(positions[1]);
     }
 })(jQuery);
