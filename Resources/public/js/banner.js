@@ -131,7 +131,6 @@
 
     function updateBannerBackgroundImagePosition()
     {
-        console.log(bannerBackgroundImagePositionField.val());
         banner.css('background-position', bannerBackgroundImagePositionField.val());
     }
 })(jQuery);
