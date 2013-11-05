@@ -93,16 +93,16 @@ class BlogOptions
     protected $bannerBackgroundImage;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(type="smallint", name="banner_background_image_position", options={"default" = 0})
+     * @ORM\Column(type="string", name="banner_background_image_position", options={"default" = "0% 0%"})
      */
     protected $bannerBackgroundImagePosition;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(type="smallint", name="banner_background_image_repeat", options={"default" = 0})
+     * @ORM\Column(type="string", name="banner_background_image_repeat", options={"default" = "no-repeat"})
      */
     protected $bannerBackgroundImageRepeat;
 

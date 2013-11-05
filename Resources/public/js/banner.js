@@ -5,9 +5,9 @@
     var bannerBackgroundColorField           = $('#icap_blog_options_form_banner_background_color');
     var bannerBackgroundImageContainer       = $("#icap_blog_options_form_banner_background_image_container");
     var bannerBackgroundImageFieldTemplate   = '<input type="file" id="icap_blog_options_form_banner_background_image" name="icap_blog_options_form[banner_background_image]" class="form-control">';
-    var bannerBackgroundImagePositionField   = $("#icap_blog_options_form_banner_background_image_position").hide();
     var removeBannerBackgroundImageButton    = $("#remove_banner_background_image");
     var bannerBackgroundImageParametersBlock = $("#banner_background_image_parameters");
+    var bannerBackgroundImagePositionField   = $("#icap_blog_options_form_banner_background_image_position").hide();
     var bannerBackgroundImagePositionBlock   = $(".position_table", bannerBackgroundImageParametersBlock);
     var bannerBackgroundImageRepeatField     = $("#icap_blog_options_form_banner_background_image_repeat", bannerBackgroundImageParametersBlock).hide();
     var bannerBackgroundImageRepeatBlock     = $("#icap_blog_options_form_banner_background_image_repeat_choices", bannerBackgroundImageParametersBlock);
@@ -111,8 +111,6 @@
         }
 
         banner.css('background-repeat', repeatString);
-
-        updatePositionSelection();
     }
 
     $(".orientation_btn", bannerBackgroundImagePositionBlock).click(function (event) {
@@ -122,30 +120,18 @@
         newPosition.addClass('selected');
 
         var positions = newPosition.data('value').split(" ");
-
         var positionX = tabPosition[0][positions[0]];
         var positionY = tabPosition[1][positions[1]];
+        var bannerBackgroundImagePosition = positionX + " " + positionY;
 
-        banner.css('background-position', positionX + " " + positionY);
+        bannerBackgroundImagePositionField.val(bannerBackgroundImagePosition);
+
+        updateBannerBackgroundImagePosition();
     });
 
-    function updatePositionSelection()
+    function updateBannerBackgroundImagePosition()
     {
-        var repeatValue = bannerBackgroundImageRepeatField.val();
-        var repeatClass = null;
-
-        switch(repeatValue) {
-            case '0':
-                break;
-            case '1':
-                repeatClass = "x";
-                break;
-            case '2':
-                repeatClass = "y";
-                break;
-            case '3':
-                repeatClass = "";
-                break;
-        }
+        console.log(bannerBackgroundImagePositionField.val());
+        banner.css('background-position', bannerBackgroundImagePositionField.val());
     }
 })(jQuery);

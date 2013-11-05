@@ -28,11 +28,11 @@ class BlogBannerType extends AbstractType
                 'theme_options' => array('label_width' => ''),
                 'required' => false
             ))
-            ->add('banner_background_image_position', 'integer', array(
+            ->add('banner_background_image_position', 'text', array(
                 'theme_options' => array('label_width' => ''),
                 'required'      => false
             ))
-            ->add('banner_background_image_repeat', 'integer', array(
+            ->add('banner_background_image_repeat', 'text', array(
                 'theme_options' => array('label_width' => ''),
                 'required'      => false
             ))
