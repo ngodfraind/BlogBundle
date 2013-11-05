@@ -9,8 +9,10 @@
     var bannerBackgroundImageParametersBlock = $("#banner_background_image_parameters");
     var bannerBackgroundImagePositionField   = $("#icap_blog_options_form_banner_background_image_position").hide();
     var bannerBackgroundImagePositionBlock   = $(".position_table", bannerBackgroundImageParametersBlock);
-    var bannerBackgroundImageRepeatField     = $("#icap_blog_options_form_banner_background_image_repeat", bannerBackgroundImageParametersBlock).hide();
     var bannerBackgroundImageRepeatBlock     = $("#icap_blog_options_form_banner_background_image_repeat_choices", bannerBackgroundImageParametersBlock);
+    var bannerBackgroundImageRepeatField     = $("#icap_blog_options_form_banner_background_image_repeat", bannerBackgroundImageParametersBlock).hide();
+    var bannerBackgroundImageRepeatFieldX    = $("#icap_blog_options_form_banner_background_image_repeat_x", bannerBackgroundImageRepeatBlock);
+    var bannerBackgroundImageRepeatFieldY    = $("#icap_blog_options_form_banner_background_image_repeat_y", bannerBackgroundImageRepeatBlock);
 
     var tabPosition = new Array();
     tabPosition[0]  = new Array();
@@ -81,36 +83,30 @@
 
     $("input[type=checkbox]", bannerBackgroundImageRepeatBlock).click(function (event) {
         var checkbox       = $(this);
-        if (checkbox.is(':checked')) {
-            bannerBackgroundImageRepeatField.val(parseInt(bannerBackgroundImageRepeatField.val()) + parseInt(checkbox.val()));
+        var repeatValue    = 0;
+        var repeatString   = "no-repeat";
+
+        if (bannerBackgroundImageRepeatFieldX.is(":checked") && bannerBackgroundImageRepeatFieldY.is(":checked")) {
+            repeatString = "repeat";
         }
         else {
-            bannerBackgroundImageRepeatField.val(parseInt(bannerBackgroundImageRepeatField.val()) - parseInt(checkbox.val()));
+            if (bannerBackgroundImageRepeatFieldX.is(":checked")) {
+                repeatString = "repeat-x";
+            }
+            if (bannerBackgroundImageRepeatFieldY.is(":checked")) {
+                repeatString = "repeat-y";
+            }
         }
+
+        bannerBackgroundImageRepeatField.val(repeatString);
 
         updateBannerBackgroundImageRepeat();
     });
 
     function updateBannerBackgroundImageRepeat()
     {
-        var repeatValue    = bannerBackgroundImageRepeatField.val();
-        var repeatString   = "no-repeat";
-
-        switch(repeatValue) {
-            case '0':
-                break;
-            case '1':
-                repeatString  = "repeat-x";
-                break;
-            case '2':
-                repeatString = "repeat-y";
-                break;
-            case '3':
-                repeatString = "repeat";
-                break;
-        }
-
-        banner.css('background-repeat', repeatString);
+        console.log(bannerBackgroundImageRepeatField.val());
+        banner.css('background-repeat', bannerBackgroundImageRepeatField.val());
     }
 
     $(".orientation_btn", bannerBackgroundImagePositionBlock).click(function (event) {
